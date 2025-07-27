@@ -4,19 +4,19 @@ import { addBasePath } from "@/app/lib/env";
 export default function Home() {
   return (
     <div className="h-dvh w-screen bg-gray-950">
-      <header className="relative flex items-end justify-center size-full overflow-hidden">
-        <div className="relative z-30 p-5 text-shadow-white text-white text-center mb-40">
-          <h1 className="2xl:text-8xl xl:text-6xl max-xl:text-4xl font-extralight font-(family-name:--font-bebas-neue)">
+      <header className="relative flex size-full items-end overflow-hidden">
+        <div className="relative z-30 2xl:m-40 max-2xl:m-20 max-xl:m-10  text-shadow-white text-white font-(family-name:--font-bebas-neue)">
+          <h1 className="2xl:text-8xl xl:text-6xl max-xl:text-4xl">
             CodeColorist
           </h1>
-          <p className="2xl:text-4xl xl:text-2xl max-xl:text-xl font-extralight font-(family-name:--font-bebas-neue)">
-            Security researcher and wannabe photographer
+          <p className="2xl:text-6xl xl:text-4xl max-xl:text-xl">
+            Security research and wannabe photographer
           </p>
-          <div className="mt-6 font-light text-lg">
-            <Link href="/posts/1" className="px-6 py-3 hover:text-gray-50">
+          <div className="mt-6 font-light text-4xl">
+            <Link href="/posts/1" className=" hover:text-gray-50 mr-4">
               Posts
             </Link>
-            <Link href="/talks" className="px-6 py-3 hover:text-gray-50">
+            <Link href="/talks" className=" hover:text-gray-50 mr-4">
               Talks
             </Link>
           </div>
