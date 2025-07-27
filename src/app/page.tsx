@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { addBasePath } from "@/app/lib/env";
 
-export default async function Home() {
+export default function Home() {
   return (
     <div className="h-dvh w-screen bg-gray-950">
       <header className="relative flex items-end justify-center size-full overflow-hidden">
@@ -33,11 +34,11 @@ export default async function Home() {
           className="absolute z-10 h-dvh w-dvw object-cover"
         >
           <source
-            src="/background-hdr.mp4"
+            src={addBasePath("/background-hdr.mp4")}
             type="video/mp4"
             media="(dynamic-range: high)"
           />
-          <source src="/background-sdr.webm" type="video/webm" />
+          <source src={addBasePath("/background-sdr.webm")} type="video/webm" />
           Your browser does not support the video tag.
         </video>
       </header>
