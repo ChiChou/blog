@@ -14,9 +14,11 @@ const nextConfig: NextConfig = {
 // when repo is owber.github.io, no basePath or assetPrefix is set
 
 const owner = process.env.GITHUB_OWNER;
-const repo = process.env.GITHUB_REPOSITORY;
+const ownerAndRepo = process.env.GITHUB_REPOSITORY;
 
-if (typeof owner === "string" && typeof repo === "string") {
+if (typeof owner === "string" && typeof ownerAndRepo === "string") {
+  // extract "repo" from "owner/repo"
+  const repo = ownerAndRepo.slice(owner.length + 1);
   if (repo !== `${owner}.github.io`) {
     nextConfig.basePath = `/${repo}`;
     nextConfig.assetPrefix = `/${repo}`;
