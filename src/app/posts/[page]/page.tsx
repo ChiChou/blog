@@ -49,7 +49,7 @@ export default async function Page({ params }: Params) {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <h1 className="text-3xl font-bold">Posts - Page {page}</h1>
-      <div className="max-w-2xl w-full prose prose-invert">
+      <div className="max-w-2xl w-full">
         <ul>
           {paginatedPosts.map((post) => (
             <li key={post.slug} className="mb-6">
