@@ -9,14 +9,20 @@ export default function Home() {
           <h1 className="2xl:text-8xl xl:text-6xl max-xl:text-4xl">
             CodeColorist
           </h1>
-          <p className="2xl:text-6xl xl:text-4xl max-xl:text-xl">
+          <p className="2xl:text-6xl xl:text-4xl max-xl:text-xl text-gray-100">
             Security research and wannabe photographer
           </p>
           <div className="mt-6 font-light text-4xl">
-            <Link href="/posts/1" className=" hover:text-gray-50 mr-4">
+            <Link
+              href="/posts/1"
+              className="text-gray-200 hover:text-red-300 mr-4 transition-colors"
+            >
               Posts
             </Link>
-            <Link href="/talks" className=" hover:text-gray-50 mr-4">
+            <Link
+              href="/talks"
+              className="text-gray-200 hover:text-red-300 mr-4 transition-colors"
+            >
               Talks
             </Link>
           </div>
