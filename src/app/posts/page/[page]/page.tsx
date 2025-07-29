@@ -1,8 +1,20 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 import { all } from "@/app/lib/posts";
+import { Header } from "@/components/header";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { addBasePath } from "@/app/lib/env";
+import { Footer } from "@/components/footer";
 
 const perPage = 9;
 
@@ -47,24 +59,56 @@ export default async function Page({ params }: Params) {
   const paginatedPosts = posts.slice(start, end);
 
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <h1 className="text-3xl font-bold">Posts - Page {page}</h1>
-      <div className="max-w-2xl w-full">
-        <ul>
+    <div className="font-sans min-h-screen">
+      <Header />
+
+      <div className="container mx-auto">
+        <Breadcrumb className="my-6">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/">Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Posts Page {page}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+
+      <div className="container mx-auto px-4">
+        <ul className="grid 2xl:grid-cols-3 md:grid-cols-2 gap-10 list-none p-0">
           {paginatedPosts.map((post) => (
-            <li key={post.slug} className="mb-6">
+            <li key={post.slug}>
               <Link
                 href={`/${post.y}/${post.m}/${post.d}/${post.slug}`}
-                className="mb-4 hover:underline"
+                className="block hover:underline"
               >
-                <h2 className="inline-block">{post.data.title}</h2>
+                <Image
+                  src={addBasePath(post.data.image)}
+                  alt={post.data.title}
+                  width={600}
+                  height={400}
+                  className="w-full aspect-video object-cover rounded-lg"
+                />
+                <h2 className="text-2xl font-medium line-clamp-2 my-6">
+                  {post.data.title}
+                </h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-3">
+                  {post.data.desc}
+                </p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+                  {`${post.y}-${post.m}-${post.d}`}
+                </p>
               </Link>
             </li>
           ))}
         </ul>
       </div>
 
-      <footer>
+      <footer className="container mx-auto my-20">
         <ol className="flex justify-center gap-4">
           {Array.from({ length: max }, (_, i) => (
             <li key={i + 1}>
@@ -82,6 +126,8 @@ export default async function Page({ params }: Params) {
           ))}
         </ol>
       </footer>
+
+      <Footer />
     </div>
   );
 }

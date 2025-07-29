@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 import { all, get } from "@/app/lib/posts";
 import md2html from "@/app/lib/render";
@@ -8,6 +9,13 @@ import markdownStyles from "@/app/markdown.module.css";
 
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 type Params = {
   params: Promise<{
@@ -61,10 +69,28 @@ export default async function Post({ params }: Params) {
     <div className="font-sans min-h-screen">
       <Header />
 
-      <main className="flex items-center justify-center p-8 pb-20 gap-16 sm:p-20">
-        <div className="max-w-2xl w-full prose dark:prose-invert">
+      <div className="container mx-auto max-md:px-10">
+        <Breadcrumb className="my-6">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/">Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/posts/page/1">Posts</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+      <main className="flex items-center justify-center mb-20">
+        <div className="container w-full prose dark:prose-invert max-md:p-10">
           <h1 className="text-3xl font-bold mb-4">{post.data.title}</h1>
-          <p className="text-gray-500">{`${p.year}-${p.month}-${p.day}`}</p>
+          <p className="text-gray-500 text-sm">{`${p.year}-${p.month}-${p.day}`}</p>
           <div
             className={markdownStyles["markdown"]}
             dangerouslySetInnerHTML={{ __html: html }}
