@@ -30,7 +30,7 @@ During TianfuCup, I was using heap spray. First I created a lot of `ArrayBuffer`
 
 Heap spray is less reliable. Just few weeks after TianfuCup, I realized that I can totally get ride of it. At this moment, we already have ASLR bypass to leak arbitrary `isa` pointer and `addrof` primitive to get the heap address of `NSObject` exported to JavaScript world. Addictionaly, using `toString` on a fake `NSData` object gives a binary safe arbitrary read primitive.
 
-<img src="img/2021-09-10-mistuned-part-iii/pac-cage.svg" alt="PAC Cage" />
+![PAC cage](img/2021-09-10-mistuned-part-iii/pac-cage.svg)
 
 So first create an `ArrayBuffer` to reserve enough space for fake objects. `addrof(arrayBuffer)` leaks the heap address of the corresponding `WebScriptObject`. Read its `jsObject` member gives another heap address to `Int8Array` object, whose `VectorPtr` member will be the PAC-ed address to the content of the `ArrayBuffer`. Just simply strip the high bits. Now we can reuse this memory for various fake objects.
 
@@ -104,4 +104,4 @@ loc_1B5E98338                     ; CODE XREF: jn(_:_:)+1C↑j
 
 The final result:
 
-<img src="img/2021-09-10-mistuned-part-iii/registers.png" alt="Pwned Registers" style="width: 480px"/>
+![Pwned Registers](img/2021-09-10-mistuned-part-iii/registers.png)

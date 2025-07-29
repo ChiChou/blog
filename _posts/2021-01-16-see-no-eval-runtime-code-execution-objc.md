@@ -10,7 +10,7 @@ I designed the challenge [Dezhou Instrumentz](https://github.com/ChiChou/DezhouI
 
 * [Slides](https://speakerdeck.com/chichou/see-no-eval-runtime-dynamic-code-execution-in-objective-c)
 
-<iframe src="https://www.youtube.com/embed/dvvFWa3Nm2M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<https://www.youtube.com/embed/dvvFWa3Nm2M>
 
 The challenge is about abusing runtime feature of Objective-C to execute arbitrary unsigned code on iOS (even with PAC). This is surprising because dynamically parsing and executing code (eval) is usually seen in script interpreters, not for a compiled language like Objective-C. I didn't have too much time preparing that talk so I'm about to add more detail on the chapters it didn't cover.
 
@@ -430,7 +430,7 @@ Seems like this post inspired some exploit technique in the wild: [FORCEDENTRY: 
 
 [An analysis of an in-the-wild iOS Safari WebContent to GPU Process exploit](https://googleprojectzero.blogspot.com/2023/10/an-analysis-of-an-in-the-wild-ios-safari-sandbox-escape.html)
 
-<p style="text-align: center"><img src="https://i.imgur.com/TxkzN48.jpeg" width="240" class="meme" /></p>
+![meme](https://i.imgur.com/TxkzN48.jpeg)
 
 #### Updated on Jan 2024
 

@@ -16,7 +16,7 @@ This talk revealed some very interesting LPE bugs found in diagnostic tool of th
 
 So I started looking at these services:
 
-<p class="outstanding"><img src="img/2019-04-13-rootpipe-reborn-part-i/diagext.svg"></p>
+![](img/2019-04-13-rootpipe-reborn-part-i/diagext.svg)
 
 Functionalities of these helpers are similar. Let's take a closer look at `timemachine.helper`. The interface is extremely simple:
 
