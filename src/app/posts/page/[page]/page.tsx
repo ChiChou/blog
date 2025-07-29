@@ -69,10 +69,12 @@ export default async function Page({ params }: Params) {
           {Array.from({ length: max }, (_, i) => (
             <li key={i + 1}>
               <Link
-                href={`/posts/${i + 1}`}
-                className={`px-4 py-2 rounded transition-colors ${
-                  i + 1 === page ? "bg-gray-900 text-white" : "bg-gray-700"
-                } hover:bg-gray-600`}
+                href={`/posts/page/${i + 1}`}
+                className={`px-4 py-2 rounded transition-colors dark:text-gray-50 text-gray-400 ${
+                  i + 1 === page
+                    ? "dark:bg-gray-900 bg-gray-50"
+                    : "dark:bg-gray-700 bg-gray-100"
+                } dark:hover:bg-gray-600 hover:bg-gray-200`}
               >
                 {i + 1}
               </Link>

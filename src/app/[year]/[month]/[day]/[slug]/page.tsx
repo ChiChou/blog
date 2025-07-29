@@ -56,7 +56,7 @@ export default async function Post({ params }: Params) {
 
   return (
     <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <div className="max-w-2xl w-full prose prose-invert">
+      <div className="max-w-2xl w-full prose dark:prose-invert">
         <p className="text-gray-500">
           Post date: {`${p.year}-${p.month}-${p.day}`}
         </p>
