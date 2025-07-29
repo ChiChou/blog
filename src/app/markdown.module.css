@@ -12,28 +12,13 @@
         @apply font-extralight;
     }
 
-    p,
-    ul,
-    ol,
-    blockquote {
-        @apply my-6;
-    }
-
-    ul,
-    ol > li {
-        @apply list-disc ml-6 mb-2;
-    }
-
-    code:not([class]) {
-        @apply bg-gray-900 text-red-400 break-all;
-    }
-
     pre {
-        @apply px-4 py-2 rounded font-mono overflow-x-auto;
-        background-color: #23241f;
+        @apply font-mono text-sm;
+        background-color: var(--hljs-background);
+    }
 
-        > code:not([class]) {
-            @apply text-gray-50 bg-transparent;
-        }
+    code {
+        @apply font-mono font-light after:content-[''] before:content-[''];
+        color: --var(--color-red);
     }
 }

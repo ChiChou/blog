@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import "./highlight.css";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
