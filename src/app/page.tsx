@@ -14,7 +14,7 @@ export default function Home() {
           </p>
           <div className="mt-6 font-light text-4xl">
             <Link
-              href="/posts/1"
+              href="/posts/page/1"
               className="text-gray-200 hover:text-red-300 mr-4 transition-colors"
             >
               Posts

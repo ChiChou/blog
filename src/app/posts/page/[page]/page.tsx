@@ -70,9 +70,9 @@ export default async function Page({ params }: Params) {
             <li key={i + 1}>
               <Link
                 href={`/posts/${i + 1}`}
-                className={`px-4 py-2 rounded ${
-                  i + 1 === page ? "bg-blue-500 text-white" : "bg-gray-200"
-                } hover:bg-blue-400`}
+                className={`px-4 py-2 rounded transition-colors ${
+                  i + 1 === page ? "bg-gray-900 text-white" : "bg-gray-700"
+                } hover:bg-gray-600`}
               >
                 {i + 1}
               </Link>
