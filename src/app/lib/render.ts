@@ -1,4 +1,5 @@
 import { unified } from "unified";
+import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeRewrite from "rehype-rewrite";
@@ -7,9 +8,13 @@ import rehypeStringify from "rehype-stringify";
 
 import { addBasePath } from "./env";
 
-import type { Root, Element, RootContent } from 'hast';
+import type { Root, Element, RootContent } from "hast";
 
-function rewrite(node: Root | RootContent, index?: number, parent?: Root | Element): void {
+function rewrite(
+  node: Root | RootContent,
+  index?: number,
+  parent?: Root | Element,
+): void {
   if (node.type !== "element") return;
 
   if (node.tagName === "a" && node.properties) {
@@ -43,6 +48,7 @@ function rewrite(node: Root | RootContent, index?: number, parent?: Root | Eleme
 export default async function md2html(markdown: string) {
   const result = await unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkRehype, {
       allowDangerousHtml: true,
     })
