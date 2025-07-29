@@ -14,6 +14,7 @@
 
     pre {
         @apply font-mono text-sm;
+        color: var(--hljs-text);
         background-color: var(--hljs-background);
     }
 

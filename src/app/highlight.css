@@ -4,11 +4,12 @@
     */
 
     :root {
+        --hljs-text: #000;
         --hljs-background: #f8f8ff;
     }
 
     .hljs {
-        color: #000;
+        color: var(--hljs-text);
     }
 
     .hljs-comment,
@@ -104,6 +105,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --hljs-background: #2e3440; /* Polar Night */
+        --hljs-text: #d8dee9;
     }
 
     /*
@@ -152,7 +154,7 @@
 
     .hljs,
     .hljs-subst {
-        color: #d8dee9;
+        color: var(--hljs-text);
     }
 
     .hljs-selector-tag {

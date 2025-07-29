@@ -63,7 +63,7 @@ export default async function Page({ params }: Params) {
       <Header />
 
       <div className="container mx-auto">
-        <Breadcrumb className="my-6">
+        <Breadcrumb className="m-6">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>

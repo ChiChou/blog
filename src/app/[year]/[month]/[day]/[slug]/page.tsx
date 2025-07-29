@@ -69,8 +69,8 @@ export default async function Post({ params }: Params) {
     <div className="font-sans min-h-screen">
       <Header />
 
-      <div className="container mx-auto max-md:px-10">
-        <Breadcrumb className="my-6">
+      <div className="container mx-auto">
+        <Breadcrumb className="m-6">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
