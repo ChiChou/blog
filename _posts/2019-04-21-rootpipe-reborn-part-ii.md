@@ -137,7 +137,7 @@ Since the child process has been replaced, there won't be any callback. You have
 
 From the console output, the server accepts our request:
 
-![](img/2019-04-21-rootpipe-reborn-part-ii/upl0TAIffe77rXYMsCIJwg.png)
+![](img/2019-04-21-rootpipe-reborn-part-ii/logs.png)
 
 Now the check is passed
 
@@ -237,7 +237,7 @@ if [ -x /System/Library/Frameworks/SystemConfiguration.framework/Resources/get-n
 
 By the way, I was surprised by how many diagnostic tools depending on the non-existing directory `/usr/local/bin`.
 
-![](img/2019-04-21-rootpipe-reborn-part-ii/d8BjICtE2TB-xuZLe98sXQ.png)
+![](img/2019-04-21-rootpipe-reborn-part-ii/search-result.png)
 
 The bug has been fixed in macOS 10.14.4 and iOS 12.2.
 
