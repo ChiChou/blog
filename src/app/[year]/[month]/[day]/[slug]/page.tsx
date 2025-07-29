@@ -6,6 +6,9 @@ import md2html from "@/app/lib/render";
 
 import markdownStyles from "@/app/markdown.module.css";
 
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+
 type Params = {
   params: Promise<{
     year: string;
@@ -55,17 +58,21 @@ export default async function Post({ params }: Params) {
   const html = await md2html(post.content);
 
   return (
-    <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <div className="max-w-2xl w-full prose dark:prose-invert">
-        <p className="text-gray-500">
-          Post date: {`${p.year}-${p.month}-${p.day}`}
-        </p>
-        <h1 className="text-3xl font-bold mb-4">{post.data.title}</h1>
-        <div
-          className={markdownStyles["markdown"]}
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      </div>
+    <div className="font-sans min-h-screen">
+      <Header />
+
+      <main className="flex items-center justify-center p-8 pb-20 gap-16 sm:p-20">
+        <div className="max-w-2xl w-full prose dark:prose-invert">
+          <h1 className="text-3xl font-bold mb-4">{post.data.title}</h1>
+          <p className="text-gray-500">{`${p.year}-${p.month}-${p.day}`}</p>
+          <div
+            className={markdownStyles["markdown"]}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
