@@ -123,13 +123,13 @@ But since it performs the security check based on process id, we can bypass it. 
 
 The steps to trigger the race condition are as follows:
 
-Create multiple client processes via `posix_spawn` or `NSTask` (note: you can't do this on iOS).
+1. Create multiple client processes via `posix_spawn` or `NSTask` (note: you can't do this on iOS).
 
-Avoid using `fork` because Objective-C runtime may crash between `fork` and `exec`, which is required by this attack.
+2. Avoid using `fork` because Objective-C runtime may crash between `fork` and `exec`, which is required by this attack.
 
-On 10.13 you can add an `OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` environment variable before process creation or add a `__DATA,__objc_fork_ok` section to your executable as a workaround. But these workarounds are not compatible with previous macOS. For more information, please refer to [Objective-C and fork() in macOS 10.13](http://www.sealiesoftware.com/blog/archive/2017/6/5/Objective-C_and_fork_in_macOS_1013.html).
+3. On 10.13 you can add an `OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` environment variable before process creation, or add a `__DATA,__objc_fork_ok` section to your executable as a workaround. But these workarounds are not compatible with previous macOS. For more information, please refer to [Objective-C and fork() in macOS 10.13](http://www.sealiesoftware.com/blog/archive/2017/6/5/Objective-C_and_fork_in_macOS_1013.html).
 
-Send multiple XPC messages to the server to block the message queue.
+4. Send multiple XPC messages to the server to block the message queue.
 
 Ian Beer uses `execve` to replace the binary to a trusted one and write to its its buffer to prevent the new process from terminating. Instead, I chose to pass these flags `POSIX_SPAWN_SETEXEC | POSIX_SPAWN_START_SUSPENDED` to `posix_spawn` to create a suspended child process and reuse the pid of the parent.
 
@@ -139,7 +139,7 @@ From the console output, the server accepts our request:
 
 ![](img/2019-04-21-rootpipe-reborn-part-ii/logs.png)
 
-Now the check is passed
+Now the check is bypassed.
 
 ## Give Me Root
 
@@ -205,20 +205,20 @@ Since it will never override existing file, we can not:
 * override suid binaries (not to mention file permission and rootless) ❌
 * override one of the PrivilegedHelpers ❌
 
-And it will fix file permissions, none of these would work:
+As it will fix file permissions, none of these would work:
 
 * add sudoer ❌
-* add an entry to /Library/LaunchDaemons to register a new XPC service ❌
+* add an entry to `/Library/LaunchDaemons` to register a new XPC service ❌
 
 We need more primitives.
 
-The daemon has other methods named `run*diagnoseWithDestination`. They are various external command wrappers just like those diagnose helpers mentioned from my previous post. What's interesting is that runTMDiagnoseWithDestination: acts the same as timemachinehelper , thus we can trigger the CVE-2019-8513 command injection.
+The daemon has other methods named `run*diagnoseWithDestination`. They are various external command wrappers just like those diagnose helpers mentioned from my previous post. What's interesting is that `runTMDiagnoseWithDestination:` acts the same as `timemachinehelper`, thus we can trigger the CVE-2019-8513 command injection.
 
-At first I was looking at runMDSDiagnoseWithDestination: , who launches /usr/bin/mddiagnose that will finally spawn `/usr/local/bin/ddt` after around 10 seconds, waiting for the `/usr/bin/top` command to end. Remember the previous post? This location does not exist by default and we can put custom executable with the arbitrary file copy bug.
+At first I was looking at `runMDSDiagnoseWithDestination:` , who launches `/usr/bin/mddiagnose` that will eventually spawn `/usr/local/bin/ddt` after around 10 seconds, waiting for the `/usr/bin/top` command to end. Remember the previous post? This location does not exist by default and we can put custom executables with the arbitrary file copy bug.
 
-Another exploit path is method `runMobilityReportWithDestination:`. It invokes this shell script: `/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/Resources/get-mobility-info`
+Another code path is method `runMobilityReportWithDestination:`. It invokes this shell script: `/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/Resources/get-mobility-info`
 
-The script checks the existence of `/usr/local/bin/netdiagnose`. If so, execute it as root. The exploit will success within milliseconds.
+The script checks the existence of `/usr/local/bin/netdiagnose`. If so, it executes as root. The exploit will succeed within milliseconds.
 
 ```shell
 PCAP_STARTED=0
@@ -246,4 +246,4 @@ The bug has been fixed in macOS 10.14.4 and iOS 12.2.
 
 ## PoC
 
-<https://github.com/ChiChou/sploits/tree/master/CVE-2019-8565>
+<https://github.com/ChiChou/sploits/tree/main/macOS/CVE-2019-8565-fbahelperd>
