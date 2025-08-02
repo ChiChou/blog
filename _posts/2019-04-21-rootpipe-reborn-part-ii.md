@@ -2,7 +2,7 @@
 layout:	post
 title:	"Rootpipe Reborn (Part II): CVE-2019-8565 Feedback Assistant Race Condition"
 date:	  2019-04-21
-image:  img/2019-04-21-rootpipe-reborn-part-ii/race.jpg
+image:  img/2019-04-21-rootpipe-reborn-part-ii/race.webp
 desc:   Relying on pid to validate IPC peer is unsafe.
 ---
 

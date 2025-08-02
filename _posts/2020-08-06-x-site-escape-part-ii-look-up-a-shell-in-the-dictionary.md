@@ -2,7 +2,7 @@
 layout:	post
 title:	"X Site eScape (Part II): Look Up a Shell in the Dictionary"
 date:   2020-08-06
-image:  img/2020-08-06-x-site-escape-part/shell.jpg
+image:  img/2020-08-06-x-site-escape-part/shell.webp
 desc:   A funny bug chain turing inter-process XSS to native code execution for sandbox escape.
 ---
 
