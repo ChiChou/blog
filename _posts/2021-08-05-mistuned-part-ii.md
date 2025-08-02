@@ -130,7 +130,7 @@ for (let i = 0; i < 32; i++)
 w // boom
 ```
 
-![fakeobj](img/2021-08-05-mistuned-part-ii/fakeobj.jpg)
+![fakeobj](img/2021-08-05-mistuned-part-ii/41414141.png)
 
 Now the challenge is, how do we exploit this on PAC devices? Stay tuned for the next posts.
 
